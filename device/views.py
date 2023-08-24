@@ -32,3 +32,15 @@ class DeviceLogViewSet(viewsets.ModelViewSet):
         serializer.save(checked_out=timezone.now())
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(
+            instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+
+        if 'returned' in serializer.validated_data:
+            instance.returned = timezone.now()
+            instance.save()
+
+        return Response(serializer.data)
