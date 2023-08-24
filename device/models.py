@@ -7,6 +7,9 @@ from company.models import Employee
 class Device(models.Model):
     name = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.name
+
 
 class DeviceLog(models.Model):
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
@@ -15,3 +18,6 @@ class DeviceLog(models.Model):
     returned = models.DateTimeField()
     condition_out = models.TextField()
     condition_returned = models.TextField()
+
+    def __str__(self):
+        return self.device
