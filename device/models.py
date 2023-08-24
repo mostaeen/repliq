@@ -15,9 +15,9 @@ class DeviceLog(models.Model):
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     checked_out = models.DateTimeField()
-    returned = models.DateTimeField()
-    condition_out = models.TextField()
-    condition_returned = models.TextField()
+    returned = models.DateTimeField(null=True, blank=True)
+    condition_out = models.TextField(blank=True)
+    condition_returned = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.device
